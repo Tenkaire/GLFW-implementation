@@ -1,5 +1,9 @@
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import sun.font.TrueTypeFont;
+
+import java.security.KeyStore;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -21,36 +25,57 @@ public class Main {
         }
 
         GLFWVidMode videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
         glfwSetWindowPos(window,(videoMode.width() - WIDTH)/2, (videoMode.height()- HEIGHT)/2);
+        
         glfwShowWindow(window); //showing the window
+
 
         glfwMakeContextCurrent(window);
         GL.createCapabilities(); //creating the context.
 
+        glEnable(GL_TEXTURE_2D);
+
+        Texture tex = new Texture("./res/man.png");
+
 
         while (!glfwWindowShouldClose(window)){
 
-            float red = 1;
-            float green = 1;
-            float blue = 1;
+//            float red = 1;
+//            float green = 1;
+//            float blue = 1;
 
             if(glfwGetKey(window, GLFW_KEY_W) == GL_TRUE){
-                red = 0.75f;
-                green = 0.75f;
-                blue = 0.75f;
+//                red = 0.75f;
+//                green = 0.75f;
+//                blue = 0.75f;
+
+            }
+            if(glfwGetKey(window,GLFW_KEY_S) == GL_TRUE){
+                glfwSetWindowShouldClose(window, Boolean.TRUE);
             }
             glfwPollEvents();
 
             glClear(GL_COLOR_BUFFER_BIT);
 
+            tex.bind();
+
             glBegin(GL_QUADS);
-            glColor4f(red,0,0,0);
+
+            glTexCoord2f(0,0);
+//            glColor4f(red,0,0,0);
             glVertex2f(-0.5f,0.5f);
-            glColor4f(0,green,0,0);
+
+            glTexCoord2f(1,0);
+//            glColor4f(0,green,0,0);
             glVertex2f(0.5f,0.5f);
-            glColor4f(0,0,blue,0);
+
+            glTexCoord2f(1,1);
+//            glColor4f(0,0,blue,0);
             glVertex2f(0.5f,-0.5f);
-            glColor4f(1,1,1,0);
+
+            glTexCoord2f(0,1);
+//            glColor4f(1,1,1,0);
             glVertex2f(-0.5f,-0.5f);
 
             glEnd();
