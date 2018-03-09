@@ -27,7 +27,7 @@ public class Main {
         GLFWVidMode videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
         glfwSetWindowPos(window,(videoMode.width() - WIDTH)/2, (videoMode.height()- HEIGHT)/2);
-        
+
         glfwShowWindow(window); //showing the window
 
 
@@ -35,6 +35,24 @@ public class Main {
         GL.createCapabilities(); //creating the context.
 
         glEnable(GL_TEXTURE_2D);
+
+        float[] vertices = new float[]{
+               -0.5f, 0.5f, 0, // top left
+                0.5f, 0.5f, 0, // top right
+                0.5f, -0.5f, 0, // bottom right
+
+                0.5f, -0.5f, 0, // bottom right
+                -0.5f, -0.5f, 0, // bottom left
+                -0.5f, 0.5f, 0, // top left
+
+        };
+
+
+        float[] texture = new float[]{
+                0,0,    1,0,    1,1,
+                1,1,    0,1,    0,0
+        };
+        Model model = new Model(vertices,texture);
 
         Texture tex = new Texture("./res/man.png");
 
@@ -60,25 +78,27 @@ public class Main {
 
             tex.bind();
 
-            glBegin(GL_QUADS);
+            model.render();
 
-            glTexCoord2f(0,0);
-//            glColor4f(red,0,0,0);
-            glVertex2f(-0.5f,0.5f);
-
-            glTexCoord2f(1,0);
-//            glColor4f(0,green,0,0);
-            glVertex2f(0.5f,0.5f);
-
-            glTexCoord2f(1,1);
-//            glColor4f(0,0,blue,0);
-            glVertex2f(0.5f,-0.5f);
-
-            glTexCoord2f(0,1);
-//            glColor4f(1,1,1,0);
-            glVertex2f(-0.5f,-0.5f);
-
-            glEnd();
+//            glBegin(GL_QUADS);
+//
+//            glTexCoord2f(0,0);
+////            glColor4f(red,0,0,0);
+//            glVertex2f(-0.5f,0.5f);
+//
+//            glTexCoord2f(1,0);
+////            glColor4f(0,green,0,0);
+//            glVertex2f(0.5f,0.5f);
+//
+//            glTexCoord2f(1,1);
+////            glColor4f(0,0,blue,0);
+//            glVertex2f(0.5f,-0.5f);
+//
+//            glTexCoord2f(0,1);
+////            glColor4f(1,1,1,0);
+//            glVertex2f(-0.5f,-0.5f);
+//
+//            glEnd();
 
             glfwSwapBuffers(window);            //????
         }
