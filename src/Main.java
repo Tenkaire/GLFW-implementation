@@ -40,19 +40,20 @@ public class Main {
                -0.5f, 0.5f, 0, // top left
                 0.5f, 0.5f, 0, // top right
                 0.5f, -0.5f, 0, // bottom right
-
-                0.5f, -0.5f, 0, // bottom right
-                -0.5f, -0.5f, 0, // bottom left
-                -0.5f, 0.5f, 0, // top left
+                -0.5f, -0.5f, 0, // bottom left 1
 
         };
 
 
         float[] texture = new float[]{
-                0,0,    1,0,    1,1,
-                1,1,    0,1,    0,0
+                0,0,    1,0,    1,1,    0,1,// this is something.
         };
-        Model model = new Model(vertices,texture);
+
+        int[] indices = new int[]{
+                0,1,2,  2,3,0
+        };
+
+        Model model = new Model(vertices,texture,indices);
 
         Texture tex = new Texture("./res/man.png");
 
