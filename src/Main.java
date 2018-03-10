@@ -55,7 +55,9 @@ public class Main {
 
         Model model = new Model(vertices,texture,indices);
 
-        Texture tex = new Texture("./res/man.png");
+//        Texture tex = new Texture("./res/man.png");
+
+        Shader shader = new Shader("shader");
 
 
         while (!glfwWindowShouldClose(window)){
@@ -77,7 +79,8 @@ public class Main {
 
             glClear(GL_COLOR_BUFFER_BIT);
 
-            tex.bind();
+//            tex.bind();
+            shader.bind();
 
             model.render();
 
